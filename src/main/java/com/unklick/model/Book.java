@@ -26,7 +26,7 @@ public class Book {
         this.publisher = publisher;
     }
 
-    public Book(String title, String isbn, String publisher, Set<Author> authors){
+    public Book(String title){
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
