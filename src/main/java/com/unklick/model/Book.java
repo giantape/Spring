@@ -1,86 +1,94 @@
 package com.unklick.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
 
 @Entity
 public class Book {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title, isbn;
+    private String title;
+    private String isbn;
+
     @OneToOne
     private Publisher publisher;
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
-    inverseJoinColumns = @JoinColumn(name = "author_id"))
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    //defined Empty Constructor
-    public Book(){}
+    public Book() {
+    }
 
-    public Book(String title, String isbn, Publisher publisher){
+    public Book(String title, String isbn, Publisher publisher) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
     }
 
-    public Book(String title){
+    public Book(String title, String isbn, Publisher publisher, Set<Author> authors) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
         this.authors = authors;
     }
 
-    //Setter
-    public void setTitle(String title){
-        this.title = title;
+    public Long getId() {
+        return id;
     }
-    public void setIsbn(String isbn){
-        this.isbn = isbn;
-    }
-    public void setPublisher(Publisher publisher){
-        this.publisher = publisher;
-    }
-    public void setAuthors(Set<Author> authors){
-        this.authors = authors;
-    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-
-    //Getter
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
-    public String getIsbn(){
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIsbn() {
         return isbn;
     }
-    public Publisher getPublisher(){
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Publisher getPublisher() {
         return publisher;
     }
-    public Set<Author> getAuthors(){
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
+
+    public Set<Author> getAuthors() {
         return authors;
     }
-    public Long getId() {
-        return id;
+
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Book book = (Book) o;
-        return Objects.equals(id, book.id);
+
+        return id != null ? id.equals(book.id) : book.id == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
