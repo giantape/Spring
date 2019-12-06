@@ -1,2 +1,2 @@
 # Spring
-a simple applicaton using java Spring boot, marven, h2.
+a simple applicaton using java, Spring boot, marven, h2.
